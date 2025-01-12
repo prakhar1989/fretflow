@@ -64,11 +64,9 @@
 
 <!--  FRETBOARD -->
 <div class="numbers">
-    <div class="string">
-        {#each Array.from({ length: fretCount + 1 }).map((_, i) => i) as fretIndex}
-            <div class="fret">{fretIndex}</div>
-        {/each}
-    </div>
+    {#each Array.from({ length: fretCount + 1 }).map((_, i) => i) as fretIndex}
+        <div class="fret">{fretIndex}</div>
+    {/each}
 </div>
 <div class="fretboard-container">
     <div class="tuning">
@@ -99,7 +97,7 @@
     .controls {
         display: flex;
         gap: 24px;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         margin: 2em 0;
     }
@@ -115,7 +113,20 @@
         gap: var(--string-gap);
     }
 
+    div.string::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 2px;
+        background-color: var(--string-color);
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+
     .string {
+        position: relative;
         display: flex;
         gap: var(--notes-gap);
     }
@@ -125,6 +136,7 @@
         flex-direction: column;
         gap: var(--string-gap);
         border-right: 16px solid var(--string-color);
+        padding-right: 12px;
     }
 
     .fret {
@@ -135,7 +147,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #454545;
+        color: var(--default-fret-color);
+        background-color: var(--default-fret-background);
     }
 
     .tuning .fret {
@@ -144,21 +157,19 @@
 
     .numbers {
         display: flex;
-        margin-bottom: 10px;
-    }
-
-    .numbers .fret {
-        border: 1px solid #242424;
-        color: #454545;
+        margin-bottom: 23px;
+        gap: var(--notes-gap);
+        border-bottom: 4px solid var(--string-color);
+        padding-bottom: 12px;
     }
 
     .numbers .fret:first-child {
         visibility: hidden;
-        margin-right: 14px;
+        margin-right: 24px;
     }
 
     .fret.highlighted {
-        background-color:var(--highlighted-note-color);
+        background-color: var(--highlighted-note-color);
         color: white;
     }
 

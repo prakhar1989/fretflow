@@ -13,8 +13,10 @@
     -moz-osx-font-smoothing: grayscale;
 
 
-    --notes-gap: 10px;
+    --notes-gap: 16px;
     --string-gap: 12px;
+    --default-fret-color: #818181;
+    --default-fret-background: #303030;
     --highlighted-note-color: blue;
     --root-note-color: rebeccapurple;
     --fret-size: 40px;
