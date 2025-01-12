@@ -19,9 +19,16 @@
     );
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
+    $: showAllNotes = true;
 </script>
 
 <article class="controls">
+    <div class="all-notes">
+        <label>
+            All notes
+            <input name="notes" type="checkbox" bind:checked={showAllNotes} />
+        </label>
+    </div>
     <div class="frets">
         <label for="frets">Frets</label>
         <input type="number" id="frets" bind:value={numberOfFrets} />
@@ -92,6 +99,7 @@
                         <div
                             class="fret"
                             class:root={note === selectedKey}
+                            class:hide={!showAllNotes}
                             class:highlighted={scaleNotes.has(note)}
                         >
                             {note}
@@ -106,9 +114,8 @@
 <style>
     .controls {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        margin: 2em 0;
+        justify-content: space-between;
     }
 
     .fretboard-container {
@@ -186,6 +193,10 @@
     .numbers .fret {
         width: 40px;
         height: 40px;
+    }
+
+    .fret.hide {
+        color: var(--pico-blockquote-border-color);
     }
 
     .fret.highlighted {
