@@ -35,10 +35,6 @@
                 />
             </label>
         </div>
-        <div class="frets">
-            <label for="frets">Frets</label>
-            <input type="number" id="frets" bind:value={numberOfFrets} />
-        </div>
         <div class="keys">
             <label for="key">Key</label>
             <select id="key" bind:value={key}>
@@ -202,6 +198,7 @@
     .numbers .fret {
         width: 40px;
         height: 40px;
+        background: none;
     }
 
     .fret.hide {
