@@ -6,7 +6,7 @@
         generateFretboard,
         generateScaleNotes,
     } from "$lib/music-utils";
-    import {fade} from 'svelte/transition';
+    import { fade } from "svelte/transition";
 
     let numberOfFrets = 24;
     let key: KEY = "A";
@@ -24,49 +24,55 @@
 </script>
 
 <article class="controls">
-    <div class="all-notes">
-        <label>
-            All notes
-            <input name="notes" type="checkbox" bind:checked={showAllNotes} />
-        </label>
-    </div>
-    <div class="frets">
-        <label for="frets">Frets</label>
-        <input type="number" id="frets" bind:value={numberOfFrets} />
-    </div>
-    <div class="keys">
-        <label for="key">Key</label>
-        <select id="key" bind:value={key}>
-            <option value="A">A</option>
-            <option value="A#">A#/Bb</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="C#">C#</option>
-            <option value="D">D</option>
-            <option value="D#">D#/Eb</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-            <option value="F#">F#/Gb</option>
-            <option value="G">G</option>
-            <option value="G#">G#/Ab</option>
-        </select>
-    </div>
-    <div class="tunings">
-        <label for="tuning">Tuning</label>
-        <select id="tuning" bind:value={selectedTuning}>
-            {#each Array.from(GUITAR_TUNINGS.keys()) as tuningName}
-                <option value={tuningName}>{tuningName}</option>
-            {/each}
-        </select>
-    </div>
-    <div class="scales">
-        <label for="scale">Scale</label>
-        <select id="scale" bind:value={selectedScale}>
-            <option value="MAJOR">Major</option>
-            <option value="NATURAL MINOR">Natural Minor</option>
-            <option value="MINOR PENTATONIC">Minor Pentatonic</option>
-            <option value="MAJOR PENTATONIC">Major Pentatonic</option>
-        </select>
+    <div class="grid">
+        <div class="all-notes">
+            <label>
+                All notes
+                <input
+                    name="notes"
+                    type="checkbox"
+                    bind:checked={showAllNotes}
+                />
+            </label>
+        </div>
+        <div class="frets">
+            <label for="frets">Frets</label>
+            <input type="number" id="frets" bind:value={numberOfFrets} />
+        </div>
+        <div class="keys">
+            <label for="key">Key</label>
+            <select id="key" bind:value={key}>
+                <option value="A">A</option>
+                <option value="A#">A#/Bb</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="C#">C#</option>
+                <option value="D">D</option>
+                <option value="D#">D#/Eb</option>
+                <option value="E">E</option>
+                <option value="F">F</option>
+                <option value="F#">F#/Gb</option>
+                <option value="G">G</option>
+                <option value="G#">G#/Ab</option>
+            </select>
+        </div>
+        <div class="tunings">
+            <label for="tuning">Tuning</label>
+            <select id="tuning" bind:value={selectedTuning}>
+                {#each Array.from(GUITAR_TUNINGS.keys()) as tuningName}
+                    <option value={tuningName}>{tuningName}</option>
+                {/each}
+            </select>
+        </div>
+        <div class="scales">
+            <label for="scale">Scale</label>
+            <select id="scale" bind:value={selectedScale}>
+                <option value="MAJOR">Major</option>
+                <option value="NATURAL MINOR">Natural Minor</option>
+                <option value="MINOR PENTATONIC">Minor Pentatonic</option>
+                <option value="MAJOR PENTATONIC">Major Pentatonic</option>
+            </select>
+        </div>
     </div>
 </article>
 
@@ -103,7 +109,8 @@
                             class:root={note === selectedKey}
                             class:hide={!showAllNotes}
                             class:highlighted={scaleNotes.has(note)}
-                            transition:fade>
+                            transition:fade
+                        >
                             {note}
                         </div>
                     {/each}
@@ -114,10 +121,8 @@
 </article>
 
 <style>
-    .controls {
-        display: flex;
+    .controls .grid {
         align-items: center;
-        justify-content: space-between;
     }
 
     .fretboard-container {
@@ -207,7 +212,7 @@
     .fret.highlighted {
         background-color: var(--pico-primary-background);
         color: white;
-        transform: scale(1.0);
+        transform: scale(1);
     }
 
     .fret.root {
