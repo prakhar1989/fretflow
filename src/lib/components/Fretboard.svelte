@@ -6,6 +6,8 @@
         generateFretboard,
         generateScaleNotes,
     } from "$lib/music-utils";
+    import { flip } from 'svelte/animate';
+
 
     let numberOfFrets = 24;
     let key: KEY = "A";
@@ -75,6 +77,7 @@
         <h3>
             <span class="key">{selectedKey}</span>
             {selectedScale.toLocaleLowerCase()}
+            scale
         </h3>
     </header>
     <div class="numbers">
@@ -84,8 +87,8 @@
     </div>
     <div class="fretboard-container">
         <div class="tuning">
-            {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as note}
-                <div class="string">
+            {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as note, index (index)}
+                <div class="string" animate:flip>
                     <div class="fret" class:highlighted={scaleNotes.has(note)}>
                         {note}
                     </div>
@@ -95,8 +98,8 @@
         <div class="fretboard">
             {#each fretboard as string, stringIndex}
                 <div class="string">
-                    {#each string as note, fretIndex}
-                        <div
+                    {#each string as note, fretIndex (fretIndex)}
+                        <div animate:flip
                             class="fret"
                             class:root={note === selectedKey}
                             class:hide={!showAllNotes}
