@@ -1,6 +1,6 @@
 <script lang="ts">
     import {
-        STANDARD_TUNING,
+        GUITAR_TUNINGS,
         type KEY,
         generateFretboard,
         generateScaleNotes,
@@ -9,8 +9,9 @@
     let numberOfFrets = 24;
     let key: KEY = "A";
 
+    $: selectedTuning = "Standard Tuning";
     $: fretCount = parseInt(numberOfFrets.toString());
-    $: fretboard = generateFretboard(STANDARD_TUNING, fretCount);
+    $: fretboard = generateFretboard(GUITAR_TUNINGS.get(selectedTuning)!, fretCount);
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, "MAJOR");
 </script>
@@ -39,6 +40,14 @@
             <option value="G#">G#</option>
         </select>
     </div>
+    <div class="tunings">
+        <label for="tuning">Tuning</label>
+        <select id="tuning" bind:value={selectedTuning}>
+            {#each Array.from(GUITAR_TUNINGS.keys()) as tuningName}
+                <option value={tuningName}>{tuningName}</option>
+            {/each}
+        </select>
+    </div>
 </div>
 
 <!--  FRETBOARD -->
@@ -49,7 +58,7 @@
 </div>
 <div class="fretboard-container">
     <div class="tuning">
-        {#each STANDARD_TUNING.reverse() as string}
+        {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as string}
             <div class="fret">{string}</div>
         {/each}
     </div>

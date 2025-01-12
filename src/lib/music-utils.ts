@@ -19,6 +19,21 @@ export type KEY = typeof NOTES[number];
 
 export const STANDARD_TUNING : KEY[] = ["E", "A", "D", "G", "B", "E"];
 
+export const GUITAR_TUNINGS : Map<string, KEY[]> = new Map([
+    ["Standard Tuning", ["E", "A", "D", "G", "B", "E"]],
+    ["E Flat Standard Tuning", ["D#", "G#", "C#", "F#", "A#", "D#"]],
+    ["D Standard Tuning", ["D", "G", "C", "F", "A", "D"]],
+    ["Drop D Tuning", ["D", "A", "D", "G", "B", "E"]],
+    ["Drop C Tuning", ["C", "G", "C", "F", "A", "D"]],
+    ["Drop B Tuning", ["B", "F#", "B", "E", "G#", "C#"]],
+    ["Drop C Sharp Tuning", ["C#", "G#", "C#", "F#", "A#", "D#"]],
+    ["Open G Tuning", ["D", "G", "D", "G", "B", "D"]],
+    ["Open D Tuning", ["D", "A", "D", "F#", "A", "D"]],
+    ["Open C Tuning", ["C", "G", "C", "G", "C", "E"]],
+    ["Open A Tuning", ["E", "A", "E", "A", "C#", "E"]],
+    ["DADGAD Tuning", ["D", "A", "D", "G", "A", "D"]],
+]);
+
 const MAJOR_SCALE_INTERVALS = [2, 2, 1, 2, 2, 2, 1];
 
 export const generateScaleNotes = (key: KEY, scale: SCALE): Set<KEY> => {
