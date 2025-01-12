@@ -119,6 +119,7 @@
         text-align: center;
         width: 30px;
         color: #454545;
+        box-sizing: content-box;
     }
 
     .tuning .fret {
