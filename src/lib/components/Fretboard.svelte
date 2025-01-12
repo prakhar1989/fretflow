@@ -25,17 +25,17 @@
         <label for="key">Key</label>
         <select id="key" bind:value={key}>
             <option value="A">A</option>
-            <option value="A#">A#</option>
+            <option value="A#">A#/Bb</option>
             <option value="B">B</option>
             <option value="C">C</option>
             <option value="C#">C#</option>
             <option value="D">D</option>
-            <option value="D#">D#</option>
+            <option value="D#">D#/Eb</option>
             <option value="E">E</option>
             <option value="F">F</option>
-            <option value="F#">F#</option>
+            <option value="F#">F#/Gb</option>
             <option value="G">G</option>
-            <option value="G#">G#</option>
+            <option value="G#">G#/Ab</option>
         </select>
     </div>
     <div class="tunings">
