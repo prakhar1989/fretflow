@@ -20,7 +20,7 @@
     );
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
-    $: showAllNotes = true;
+    $: showAllNotes = false;
 </script>
 
 <article class="controls">
@@ -186,6 +186,7 @@
         gap: var(--notes-gap);
         border-bottom: 4px solid var(--string-color);
         padding-bottom: 12px;
+        min-width: 1400px;
     }
 
     .numbers .fret:first-child {
