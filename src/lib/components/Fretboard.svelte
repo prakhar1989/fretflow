@@ -64,6 +64,12 @@
 
 <!--  FRETBOARD -->
 <article class="overflow-auto">
+    <header>
+        <h3>
+            <span class="key">{selectedKey}</span>
+            {selectedScale.toLocaleLowerCase()}
+        </h3>
+    </header>
     <div class="numbers">
         {#each Array.from( { length: fretCount + 1 }, ).map((_, i) => i) as fretIndex}
             <div class="fret">{fretIndex}</div>
@@ -114,6 +120,11 @@
         display: flex;
         flex-direction: column;
         gap: var(--string-gap);
+    }
+
+    article header h3 {
+        margin: 0;
+        color: var(--pico-primary-background);
     }
 
     div.string::before {
