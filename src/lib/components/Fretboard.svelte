@@ -63,37 +63,38 @@
 </article>
 
 <!--  FRETBOARD -->
-<article>
-<div class="numbers">
-    {#each Array.from({ length: fretCount + 1 }).map((_, i) => i) as fretIndex}
-        <div class="fret">{fretIndex}</div>
-    {/each}
-</div>
-<div class="fretboard-container">
-    <div class="tuning">
-        {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as note}
-            <div class="string">
-                <div class="fret"
-                    class:highlighted={scaleNotes.has(note)}>{note}</div>
-            </div>
+<article class="overflow-auto">
+    <div class="numbers">
+        {#each Array.from( { length: fretCount + 1 }, ).map((_, i) => i) as fretIndex}
+            <div class="fret">{fretIndex}</div>
         {/each}
     </div>
-    <div class="fretboard">
-        {#each fretboard as string, stringIndex}
-            <div class="string">
-                {#each string as note, fretIndex}
-                    <div
-                        class="fret"
-                        class:root={note === selectedKey}
-                        class:highlighted={scaleNotes.has(note)}
-                    >
+    <div class="fretboard-container">
+        <div class="tuning">
+            {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as note}
+                <div class="string">
+                    <div class="fret" class:highlighted={scaleNotes.has(note)}>
                         {note}
                     </div>
-                {/each}
-            </div>
-        {/each}
+                </div>
+            {/each}
+        </div>
+        <div class="fretboard">
+            {#each fretboard as string, stringIndex}
+                <div class="string">
+                    {#each string as note, fretIndex}
+                        <div
+                            class="fret"
+                            class:root={note === selectedKey}
+                            class:highlighted={scaleNotes.has(note)}
+                        >
+                            {note}
+                        </div>
+                    {/each}
+                </div>
+            {/each}
+        </div>
     </div>
-</div>
 </article>
 
 <style>
@@ -124,7 +125,7 @@
         height: 2px;
         background-color: var(--string-color);
         transform: translateY(-50%);
-        z-index: -1;
+        z-index: 2;
     }
 
     .string {
@@ -151,6 +152,7 @@
         justify-content: center;
         color: var(--pico-contrast-underline);
         background-color: var(--pico-blockquote-border-color);
+        z-index: 10;
     }
 
     .tuning .fret {
