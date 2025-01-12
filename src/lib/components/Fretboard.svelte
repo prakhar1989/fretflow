@@ -180,7 +180,12 @@
 
     .numbers .fret:first-child {
         visibility: hidden;
-        margin-right: 24px;
+        margin-right: 16px;
+    }
+
+    .numbers .fret {
+        width: 40px;
+        height: 40px;
     }
 
     .fret.highlighted {
