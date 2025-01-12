@@ -70,9 +70,10 @@
 </div>
 <div class="fretboard-container">
     <div class="tuning">
-        {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as string}
+        {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as note}
             <div class="string">
-                <div class="fret">{string}</div>
+                <div class="fret"
+                    class:highlighted={scaleNotes.has(note)}>{note}</div>
             </div>
         {/each}
     </div>
@@ -96,7 +97,6 @@
 <style>
     .controls {
         display: flex;
-        gap: 24px;
         justify-content: space-between;
         align-items: center;
         margin: 2em 0;
