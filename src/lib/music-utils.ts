@@ -1,4 +1,4 @@
-export type SCALE = "MAJOR" | "MINOR" | "MAJOR PENTATONIC" | "MINOR PENTATONIC";
+export type SCALE = "MAJOR" | "NATURAL MINOR" | "MAJOR PENTATONIC" | "MINOR PENTATONIC";
 
 export const NOTES = [
     "A",
@@ -33,22 +33,44 @@ export const GUITAR_TUNINGS : Map<string, KEY[]> = new Map([
 ]);
 
 const MAJOR_SCALE_INTERVALS = [2, 2, 1, 2, 2, 2, 1];
+const NATURAL_MINOR_SCALE_INTERVALS = [2, 1, 2, 2, 1, 2, 2];
+const MAJOR_PENTATONIC_SCALE_INTERVALS = [2, 2, 3, 2, 3];
+const MINOR_PENTATONIC_SCALE_INTERVALS = [3, 2, 2, 3, 2];
 
 export const generateScaleNotes = (key: KEY, scale: SCALE): Set<KEY> => {
+    let intervals = null;
+
     if (scale === "MAJOR") {
-        // add the key
-        const notes = new Set<KEY>([]);
-
-        const startIndex = NOTES.indexOf(key);
-        let currentIndex = startIndex;
-
-        MAJOR_SCALE_INTERVALS.forEach(interval => {
-            notes.add(NOTES[currentIndex]);
-            currentIndex = (currentIndex + interval) % NOTES.length;
-        });
-        return notes;
+        intervals = MAJOR_SCALE_INTERVALS;
     }
-    throw new Error("Unsupported scale");
+    
+    if (scale === "NATURAL MINOR") {
+        intervals = NATURAL_MINOR_SCALE_INTERVALS;
+    }
+
+    if (scale === "MAJOR PENTATONIC") {
+        intervals = MAJOR_PENTATONIC_SCALE_INTERVALS;
+    }
+
+    if (scale === "MINOR PENTATONIC") {
+        intervals = MINOR_PENTATONIC_SCALE_INTERVALS;
+    }
+
+    if (intervals === null) {
+        throw new Error("Unsupported scale");
+    }
+
+    // add the key
+    const notes = new Set<KEY>([]);
+
+    const startIndex = NOTES.indexOf(key);
+    let currentIndex = startIndex;
+
+    intervals.forEach(interval => {
+        notes.add(NOTES[currentIndex]);
+        currentIndex = (currentIndex + interval) % NOTES.length;
+    });
+    return notes;
 }
 
 export const generateFretboard = (tuning: KEY[], numberOfFrets = 24) =>

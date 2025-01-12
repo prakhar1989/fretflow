@@ -58,7 +58,46 @@ describe('generateScaleNotes', () => {
     expect(gMajorScale).toEqual(expectedNotes);
   });
 
+  // Tests for Natural Minor Scale
+  it('should generate the correct notes for an A Natural Minor scale', () => {
+    const aMinorScale = generateScaleNotes('A', 'NATURAL MINOR');
+    const expectedNotes = new Set(['A', 'B', 'C', 'D', 'E', 'F', 'G']);
+    expect(aMinorScale).toEqual(expectedNotes);
+  });
+
+  it('should generate the correct notes for a D Natural Minor scale', () => {
+    const dMinorScale = generateScaleNotes('E', 'NATURAL MINOR');
+    const expectedNotes = new Set(['E', 'F#', 'G', 'A', 'B', 'C', 'D']);
+    expect(dMinorScale).toEqual(expectedNotes);
+  });
+
+  // Tests for Major Pentatonic Scale
+  it('should generate the correct notes for a C Major Pentatonic scale', () => {
+    const cMajorPentatonic = generateScaleNotes('C', 'MAJOR PENTATONIC');
+    const expectedNotes = new Set(['C', 'D', 'E', 'G', 'A']);
+    expect(cMajorPentatonic).toEqual(expectedNotes);
+  });
+
+  it('should generate the correct notes for a G Major Pentatonic scale', () => {
+    const gMajorPentatonic = generateScaleNotes('G', 'MAJOR PENTATONIC');
+    const expectedNotes = new Set(['G', 'A', 'B', 'D', 'E']);
+    expect(gMajorPentatonic).toEqual(expectedNotes);
+  });
+
+  // Tests for Minor Pentatonic Scale
+  it('should generate the correct notes for an A Minor Pentatonic scale', () => {
+    const aMinorPentatonic = generateScaleNotes('A', 'MINOR PENTATONIC');
+    const expectedNotes = new Set(['A', 'C', 'D', 'E', 'G']);
+    expect(aMinorPentatonic).toEqual(expectedNotes);
+  });
+
+  it('should generate the correct notes for a D Minor Pentatonic scale', () => {
+    const dMinorPentatonic = generateScaleNotes('D', 'MINOR PENTATONIC');
+    const expectedNotes = new Set(['D', 'F', 'G', 'A', 'C']);
+    expect(dMinorPentatonic).toEqual(expectedNotes);
+  });
+
   it('should throw an error for an unsupported scale', () => {
-    expect(() => generateScaleNotes('A', 'MINOR' as SCALE)).toThrowError('Unsupported scale');
+    expect(() => generateScaleNotes('A', 'HARMONIC MINOR' as SCALE)).toThrowError('Unsupported scale');
   });
 });
