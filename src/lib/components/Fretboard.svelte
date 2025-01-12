@@ -21,7 +21,7 @@
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
 </script>
 
-<div class="controls">
+<article class="controls">
     <div class="frets">
         <label for="frets">Frets</label>
         <input type="number" id="frets" bind:value={numberOfFrets} />
@@ -60,9 +60,10 @@
             <option value="MAJOR PENTATONIC">Major Pentatonic</option>
         </select>
     </div>
-</div>
+</article>
 
 <!--  FRETBOARD -->
+<article>
 <div class="numbers">
     {#each Array.from({ length: fretCount + 1 }).map((_, i) => i) as fretIndex}
         <div class="fret">{fretIndex}</div>
@@ -93,6 +94,7 @@
         {/each}
     </div>
 </div>
+</article>
 
 <style>
     .controls {
