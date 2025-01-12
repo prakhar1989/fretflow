@@ -6,8 +6,7 @@
         generateFretboard,
         generateScaleNotes,
     } from "$lib/music-utils";
-    import { flip } from 'svelte/animate';
-
+    import {fade} from 'svelte/transition';
 
     let numberOfFrets = 24;
     let key: KEY = "A";
@@ -88,7 +87,7 @@
     <div class="fretboard-container">
         <div class="tuning">
             {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as note, index (index)}
-                <div class="string" animate:flip>
+                <div class="string" transition:fade>
                     <div class="fret" class:highlighted={scaleNotes.has(note)}>
                         {note}
                     </div>
@@ -97,14 +96,14 @@
         </div>
         <div class="fretboard">
             {#each fretboard as string, stringIndex}
-                <div class="string">
+                <div class="string" transition:fade>
                     {#each string as note, fretIndex (fretIndex)}
-                        <div animate:flip
+                        <div
                             class="fret"
                             class:root={note === selectedKey}
                             class:hide={!showAllNotes}
                             class:highlighted={scaleNotes.has(note)}
-                        >
+                            transition:fade>
                             {note}
                         </div>
                     {/each}
@@ -174,6 +173,7 @@
         color: var(--pico-contrast-underline);
         background-color: var(--pico-blockquote-border-color);
         z-index: 10;
+        transition: all 0.1s ease;
     }
 
     .tuning .fret {
@@ -200,15 +200,18 @@
 
     .fret.hide {
         color: var(--pico-blockquote-border-color);
+        transform: scale(0.7);
     }
 
     .fret.highlighted {
         background-color: var(--pico-primary-background);
         color: white;
+        transform: scale(1.0);
     }
 
     .fret.root {
         background-color: var(--pico-primary);
         color: white;
+        transform: scale(1.2);
     }
 </style>
