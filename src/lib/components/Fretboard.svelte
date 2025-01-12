@@ -13,7 +13,10 @@
     $: selectedScale = "MINOR PENTATONIC";
     $: selectedTuning = "Standard Tuning";
     $: fretCount = parseInt(numberOfFrets.toString());
-    $: fretboard = generateFretboard(GUITAR_TUNINGS.get(selectedTuning)!, fretCount);
+    $: fretboard = generateFretboard(
+        GUITAR_TUNINGS.get(selectedTuning)!,
+        fretCount,
+    );
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
 </script>
@@ -61,14 +64,18 @@
 
 <!--  FRETBOARD -->
 <div class="numbers">
-    {#each Array.from({ length: fretCount + 1 }).map((_, i) => i) as fretIndex}
-        <div class="fret">{fretIndex}</div>
-    {/each}
+    <div class="string">
+        {#each Array.from({ length: fretCount + 1 }).map((_, i) => i) as fretIndex}
+            <div class="fret">{fretIndex}</div>
+        {/each}
+    </div>
 </div>
 <div class="fretboard-container">
     <div class="tuning">
         {#each GUITAR_TUNINGS.get(selectedTuning)!.reverse() as string}
-            <div class="fret">{string}</div>
+            <div class="string">
+                <div class="fret">{string}</div>
+            </div>
         {/each}
     </div>
     <div class="fretboard">
@@ -105,21 +112,30 @@
     .fretboard {
         display: flex;
         flex-direction: column;
-        gap: 0px;
+        gap: var(--string-gap);
     }
 
     .string {
         display: flex;
-        gap: 0px;
+        gap: var(--notes-gap);
+    }
+
+    .tuning {
+        display: flex;
+        flex-direction: column;
+        gap: var(--string-gap);
+        border-right: 16px solid var(--string-color);
     }
 
     .fret {
-        padding: 5px;
-        border: 1px solid #ccc;
         text-align: center;
-        width: 30px;
+        border-radius: 100%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: #454545;
-        box-sizing: content-box;
     }
 
     .tuning .fret {
@@ -133,21 +149,21 @@
 
     .numbers .fret {
         border: 1px solid #242424;
-        color: #ccc;
+        color: #454545;
     }
 
     .numbers .fret:first-child {
-        display: hidden;
-        margin-right: 10px;
+        visibility: hidden;
+        margin-right: 14px;
     }
 
     .fret.highlighted {
-        background-color: blue;
+        background-color:var(--highlighted-note-color);
         color: white;
     }
 
     .fret.root {
-        background-color: rebeccapurple;
+        background-color: var(--root-note-color);
         color: white;
     }
 </style>

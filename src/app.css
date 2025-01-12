@@ -11,6 +11,14 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+
+    --notes-gap: 10px;
+    --string-gap: 12px;
+    --highlighted-note-color: blue;
+    --root-note-color: rebeccapurple;
+    --fret-size: 40px;
+    --string-color: #454545;
 }
 
 body {
