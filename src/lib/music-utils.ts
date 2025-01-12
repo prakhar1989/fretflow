@@ -17,8 +17,6 @@ export const NOTES = [
 
 export type KEY = typeof NOTES[number];
 
-export const STANDARD_TUNING : KEY[] = ["E", "A", "D", "G", "B", "E"];
-
 export const GUITAR_TUNINGS : Map<string, KEY[]> = new Map([
     ["Standard Tuning", ["E", "A", "D", "G", "B", "E"]],
     ["E Flat Standard Tuning", ["D#", "G#", "C#", "F#", "A#", "D#"]],

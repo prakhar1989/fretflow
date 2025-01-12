@@ -1,4 +1,6 @@
-import { generateScaleNotes, generateFretboard, NOTES, STANDARD_TUNING, type SCALE, type KEY } from './music-utils';
+import { generateScaleNotes, generateFretboard, NOTES, GUITAR_TUNINGS, type SCALE, type KEY } from './music-utils';
+
+const STANDARD_TUNING = GUITAR_TUNINGS.get("Standard Tuning")!;
 
 describe('generateFretboard', () => {
   it('should generate the correct fretboard for standard tuning with default frets', () => {
