@@ -2,6 +2,7 @@
     import {
         GUITAR_TUNINGS,
         type KEY,
+        type SCALE,
         generateFretboard,
         generateScaleNotes,
     } from "$lib/music-utils";
@@ -9,11 +10,12 @@
     let numberOfFrets = 24;
     let key: KEY = "A";
 
+    $: selectedScale = "MINOR PENTATONIC";
     $: selectedTuning = "Standard Tuning";
     $: fretCount = parseInt(numberOfFrets.toString());
     $: fretboard = generateFretboard(GUITAR_TUNINGS.get(selectedTuning)!, fretCount);
     $: selectedKey = key;
-    $: scaleNotes = generateScaleNotes(key, "MAJOR");
+    $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
 </script>
 
 <div class="controls">
@@ -44,6 +46,15 @@
             {#each Array.from(GUITAR_TUNINGS.keys()) as tuningName}
                 <option value={tuningName}>{tuningName}</option>
             {/each}
+        </select>
+    </div>
+    <div class="scales">
+        <label for="scale">Scale</label>
+        <select id="scale" bind:value={selectedScale}>
+            <option value="MAJOR">Major</option>
+            <option value="NATURAL MINOR">Natural Minor</option>
+            <option value="MINOR PENTATONIC">Minor Pentatonic</option>
+            <option value="MAJOR PENTATONIC">Major Pentatonic</option>
         </select>
     </div>
 </div>
