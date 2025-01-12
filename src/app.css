@@ -3,10 +3,6 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
-    color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -15,10 +11,6 @@
 
     --notes-gap: 16px;
     --string-gap: 12px;
-    --default-fret-color: #818181;
-    --default-fret-background: #303030;
-    --highlighted-note-color: blue;
-    --root-note-color: rebeccapurple;
     --fret-size: 40px;
     --string-color: #454545;
 }

@@ -147,12 +147,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--default-fret-color);
-        background-color: var(--default-fret-background);
+        color: var(--pico-contrast-underline);
+        background-color: var(--pico-blockquote-border-color);
     }
 
     .tuning .fret {
-        color: #ccc;
+        color: var(--pico-primary);
     }
 
     .numbers {
@@ -169,12 +169,12 @@
     }
 
     .fret.highlighted {
-        background-color: var(--highlighted-note-color);
+        background-color: var(--pico-primary-background);
         color: white;
     }
 
     .fret.root {
-        background-color: var(--root-note-color);
+        background-color: var(--pico-primary);
         color: white;
     }
 </style>
