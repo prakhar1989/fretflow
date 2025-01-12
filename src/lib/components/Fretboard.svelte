@@ -4,6 +4,8 @@
     const NUMBER_OF_FRETS = 24;
 
     $: fretboard = generateFretboard(STANDARD_TUNING, NUMBER_OF_FRETS);
+    $: selectedKey = "C" as KEY;
+    $: scaleNotes = generateScaleNotes(selectedKey, "MAJOR");
 </script>
 
 <div class="numbers">
@@ -21,7 +23,9 @@
         {#each fretboard as string, stringIndex}
             <div class="string">
                 {#each string as note, fretIndex}
-                    <div class="fret">{note}</div>
+                    <div class="fret" 
+                        class:root={note === selectedKey}
+                        class:highlighted={scaleNotes.has(note)}>{note}</div>
                 {/each}
             </div>
         {/each}
@@ -70,5 +74,15 @@
     .numbers .fret:first-child {
         display: hidden;
         margin-right: 10px;
+    }
+
+    .fret.highlighted {
+        background-color: blue;
+        color: white;
+    }
+
+    .fret.root {
+        background-color: rebeccapurple;
+        color: white;
     }
 </style>
