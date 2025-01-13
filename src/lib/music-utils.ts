@@ -17,7 +17,7 @@ export const NOTES = [
 
 export type KEY = typeof NOTES[number];
 
-export const GUITAR_TUNINGS : Map<string, KEY[]> = new Map([
+export const GUITAR_TUNINGS: Map<string, KEY[]> = new Map([
     ["Standard Tuning", ["E", "A", "D", "G", "B", "E"]],
     ["E Flat Standard Tuning", ["D#", "G#", "C#", "F#", "A#", "D#"]],
     ["D Standard Tuning", ["D", "G", "C", "F", "A", "D"]],
@@ -37,13 +37,15 @@ const NATURAL_MINOR_SCALE_INTERVALS = [2, 1, 2, 2, 1, 2, 2];
 const MAJOR_PENTATONIC_SCALE_INTERVALS = [2, 2, 3, 2, 3];
 const MINOR_PENTATONIC_SCALE_INTERVALS = [3, 2, 2, 3, 2];
 
+type ChordQuality = 'major' | 'minor' | 'diminished';
+
 export const generateScaleNotes = (key: KEY, scale: SCALE): Set<KEY> => {
     let intervals = null;
 
     if (scale === "MAJOR") {
         intervals = MAJOR_SCALE_INTERVALS;
     }
-    
+
     if (scale === "NATURAL MINOR") {
         intervals = NATURAL_MINOR_SCALE_INTERVALS;
     }
@@ -71,6 +73,16 @@ export const generateScaleNotes = (key: KEY, scale: SCALE): Set<KEY> => {
         currentIndex = (currentIndex + interval) % NOTES.length;
     });
     return notes;
+}
+
+export function generateDiatonicChords(key: KEY): { chord: string; quality: ChordQuality }[] {
+    const scale = generateScaleNotes(key, "MAJOR");
+    const qualities: ChordQuality[] = ['major', 'minor', 'minor', 'major', 'major', 'minor', 'diminished']
+
+    return Array.from(scale).map((note, index) => ({
+        chord: note,
+        quality: qualities[index]
+    }))
 }
 
 export const generateFretboard = (tuning: KEY[], numberOfFrets = 24) =>

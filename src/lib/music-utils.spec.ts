@@ -1,4 +1,4 @@
-import { generateScaleNotes, generateFretboard, NOTES, GUITAR_TUNINGS, type SCALE, type KEY } from './music-utils';
+import { generateScaleNotes, generateFretboard, generateDiatonicChords, GUITAR_TUNINGS, type SCALE, type KEY } from './music-utils';
 
 const STANDARD_TUNING = GUITAR_TUNINGS.get("Standard Tuning")!;
 
@@ -99,5 +99,72 @@ describe('generateScaleNotes', () => {
 
   it('should throw an error for an unsupported scale', () => {
     expect(() => generateScaleNotes('A', 'HARMONIC MINOR' as SCALE)).toThrowError('Unsupported scale');
+  });
+});
+
+describe('generateDiatonicChords', () => {
+  it('should generate correct chords for C major', () => {
+    const expectedChords = [
+      { chord: 'C', quality: 'major' },
+      { chord: 'D', quality: 'minor' },
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F', quality: 'major' },
+      { chord: 'G', quality: 'major' },
+      { chord: 'A', quality: 'minor' },
+      { chord: 'B', quality: 'diminished' },
+    ];
+    expect(generateDiatonicChords('C')).toEqual(expectedChords);
+  });
+
+  it('should generate correct chords for G major', () => {
+    const expectedChords = [
+      { chord: 'G', quality: 'major' },
+      { chord: 'A', quality: 'minor' },
+      { chord: 'B', quality: 'minor' },
+      { chord: 'C', quality: 'major' },
+      { chord: 'D', quality: 'major' },
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F#', quality: 'diminished' },
+    ];
+    expect(generateDiatonicChords('G')).toEqual(expectedChords);
+  });
+
+  it('should generate correct chords for D major', () => {
+    const expectedChords = [
+      { chord: 'D', quality: 'major' },
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F#', quality: 'minor' },
+      { chord: 'G', quality: 'major' },
+      { chord: 'A', quality: 'major' },
+      { chord: 'B', quality: 'minor' },
+      { chord: 'C#', quality: 'diminished' },
+    ];
+    expect(generateDiatonicChords('D')).toEqual(expectedChords);
+  });
+
+  it('should generate correct chords for A major', () => {
+    const expectedChords = [
+      { chord: 'A', quality: 'major' },
+      { chord: 'B', quality: 'minor' },
+      { chord: 'C#', quality: 'minor' },
+      { chord: 'D', quality: 'major' },
+      { chord: 'E', quality: 'major' },
+      { chord: 'F#', quality: 'minor' },
+      { chord: 'G#', quality: 'diminished' },
+    ];
+    expect(generateDiatonicChords('A')).toEqual(expectedChords);
+  });
+
+  it('should generate correct chords for E major', () => {
+    const expectedChords = [
+      { chord: 'E', quality: 'major' },
+      { chord: 'F#', quality: 'minor' },
+      { chord: 'G#', quality: 'minor' },
+      { chord: 'A', quality: 'major' },
+      { chord: 'B', quality: 'major' },
+      { chord: 'C#', quality: 'minor' },
+      { chord: 'D#', quality: 'diminished' },
+    ];
+    expect(generateDiatonicChords('E')).toEqual(expectedChords);
   });
 });
