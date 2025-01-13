@@ -9,9 +9,9 @@
     import { fade } from "svelte/transition";
 
     let numberOfFrets = 24;
-    let key: KEY = "A";
+    let key: KEY = "C";
 
-    $: selectedScale = "MINOR PENTATONIC";
+    $: selectedScale = "MAJOR";
     $: selectedTuning = "Standard Tuning";
     $: fretCount = parseInt(numberOfFrets.toString());
     $: fretboard = generateFretboard(
@@ -74,12 +74,19 @@
 
 <!--  FRETBOARD -->
 <article class="overflow-auto">
-    <header>
+    <header class="scale">
         <h3>
             <span class="key">{selectedKey}</span>
             {selectedScale.toLocaleLowerCase()}
             scale
         </h3>
+        <nav>
+            <ul>
+                {#each scaleNotes as note}
+                <li class="fret">{note}</li>
+                {/each}
+            </ul>
+        </nav>
     </header>
     <div class="numbers">
         {#each Array.from( { length: fretCount + 1 }, ).map((_, i) => i) as fretIndex}
@@ -116,6 +123,15 @@
     </div>
 </article>
 
+<!-- SCALE -->
+{#if selectedScale === "MAJOR"}
+<article>
+    <header>Chords</header>
+</article>
+{/if}
+
+<!-- Chord Progressions -->
+
 <style>
     .controls .grid {
         align-items: center;
@@ -132,7 +148,12 @@
         gap: var(--string-gap);
     }
 
-    article header h3 {
+    article header.scale {
+        display: flex;
+        gap: 12px;
+    }
+
+    article header.scale h3 {
         margin: 0;
         color: var(--pico-primary-background);
     }
@@ -199,6 +220,12 @@
         width: 40px;
         height: 40px;
         background: none;
+    }
+
+    article header.scale .fret {
+        margin: 0 16px;
+        background-color: var(--pico-primary-background);
+        color: white;
     }
 
     .fret.hide {
