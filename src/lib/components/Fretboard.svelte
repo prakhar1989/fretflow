@@ -4,6 +4,7 @@
         type KEY,
         type SCALE,
         generateFretboard,
+        generateDiatonicChords,
         generateScaleNotes,
     } from "$lib/music-utils";
     import { fade } from "svelte/transition";
@@ -21,6 +22,7 @@
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
     $: showAllNotes = false;
+    $: idxToRomanNumeral = (idx: number) => ["I", "II", "III", "IV", "V", "VI", "VII"][idx];
 </script>
 
 <article class="controls">
@@ -126,7 +128,13 @@
 <!-- SCALE -->
 {#if selectedScale === "MAJOR"}
 <article>
-    <header>Chords</header>
+    <header><h3>Diatonic Chords</h3></header>
+    <ul class="chords">
+        {#each generateDiatonicChords(selectedKey) as diatonicChords, index}
+            <li><span class="numeral">{idxToRomanNumeral(index)}</span>
+                <span class="chord">{diatonicChords.chord}</span> {diatonicChords.quality}</li>
+        {/each}
+    </ul>
 </article>
 {/if}
 
@@ -135,6 +143,30 @@
 <style>
     .controls .grid {
         align-items: center;
+    }
+
+    .chords{
+        margin: 0;
+        padding: 0;
+    }
+
+    .chords li {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        gap: 0.2em;
+    }
+
+    .chords li .numeral {
+        width: 40px;
+        font-weight: 500;
+        text-align: right;
+        margin-right: 16px;
+    }
+
+    .chords li .chord {
+        font-size: 1.1em;
+        font-weight: 800;
     }
 
     .fretboard-container {
@@ -153,7 +185,7 @@
         gap: 12px;
     }
 
-    article header.scale h3 {
+    article header h3 {
         margin: 0;
         color: var(--pico-primary-background);
     }
