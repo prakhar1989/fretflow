@@ -116,6 +116,46 @@ describe('generateDiatonicChords', () => {
     expect(generateDiatonicChords('C')).toEqual(expectedChords);
   });
 
+  it('should generate correct chords for C major pentatonic', () => {
+    const expectedChords = [
+      { chord: 'C', quality: 'major' },
+      { chord: 'D', quality: 'minor' },
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F', quality: 'major' },
+      { chord: 'G', quality: 'major' },
+      { chord: 'A', quality: 'minor' },
+      { chord: 'B', quality: 'diminished' },
+    ];
+    expect(generateDiatonicChords('C')).toEqual(expectedChords);
+  });
+
+
+  it('should generate correct chords for A minor', () => {
+    const expectedChords = [
+      { chord: 'A', quality: 'minor' },
+      { chord: 'B', quality: 'diminished' },
+      { chord: 'C', quality: 'major' },
+      { chord: 'D', quality: 'minor' },
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F', quality: 'major' },
+      { chord: 'G', quality: 'major' },
+    ];
+    expect(generateDiatonicChords('A', "NATURAL MINOR")).toEqual(expectedChords);
+  });
+
+  it('should generate correct chords for A minor pentatonic', () => {
+    const expectedChords = [
+      { chord: 'A', quality: 'minor' },
+      { chord: 'B', quality: 'diminished' },
+      { chord: 'C', quality: 'major' },
+      { chord: 'D', quality: 'minor' },
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F', quality: 'major' },
+      { chord: 'G', quality: 'major' },
+    ];
+    expect(generateDiatonicChords('A', "MINOR PENTATONIC")).toEqual(expectedChords);
+  });
+
   it('should generate correct chords for G major', () => {
     const expectedChords = [
       { chord: 'G', quality: 'major' },
@@ -127,6 +167,19 @@ describe('generateDiatonicChords', () => {
       { chord: 'F#', quality: 'diminished' },
     ];
     expect(generateDiatonicChords('G')).toEqual(expectedChords);
+  });
+
+  it('should generate correct chords for E minor', () => {
+    const expectedChords = [
+      { chord: 'E', quality: 'minor' },
+      { chord: 'F#', quality: 'diminished' },
+      { chord: 'G', quality: 'major' },
+      { chord: 'A', quality: 'minor' },
+      { chord: 'B', quality: 'minor' },
+      { chord: 'C', quality: 'major' },
+      { chord: 'D', quality: 'major' },
+    ];
+    expect(generateDiatonicChords('E', "NATURAL MINOR")).toEqual(expectedChords);
   });
 
   it('should generate correct chords for D major', () => {

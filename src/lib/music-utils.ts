@@ -75,13 +75,27 @@ export const generateScaleNotes = (key: KEY, scale: SCALE): Set<KEY> => {
     return notes;
 }
 
-export function generateDiatonicChords(key: KEY): { chord: string; quality: ChordQuality }[] {
-    const scale = generateScaleNotes(key, "MAJOR");
-    const qualities: ChordQuality[] = ['major', 'minor', 'minor', 'major', 'major', 'minor', 'diminished']
+export function generateDiatonicChords(key: KEY, scale: SCALE = "MAJOR"): { chord: string; quality: ChordQuality }[] {
+    let effectiveScale = scale;
 
-    return Array.from(scale).map((note, index) => ({
+    // For pentatonic scales, just use the corresponding major or minor
+    // since pentatonic scale sound good over the diatonic chords
+    if (scale === "MAJOR PENTATONIC") {
+        effectiveScale = "MAJOR";
+    }
+    if (scale === "MINOR PENTATONIC") {
+        effectiveScale = "NATURAL MINOR";
+    }
+
+    const scaleNotes = generateScaleNotes(key, effectiveScale);
+    const majorChordQualities: ChordQuality[] = ['major', 'minor', 'minor', 'major', 'major', 'minor', 'diminished']
+    const minorChordQualities: ChordQuality[] = ['minor', 'diminished', 'major', 'minor', 'minor', 'major', 'major'];
+
+    const chords = effectiveScale === "MAJOR" ? majorChordQualities : minorChordQualities;
+
+    return Array.from(scaleNotes).map((note, index) => ({
         chord: note,
-        quality: qualities[index]
+        quality: chords[index]
     }))
 }
 

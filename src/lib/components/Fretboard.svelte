@@ -126,17 +126,15 @@
 </article>
 
 <!-- SCALE -->
-{#if selectedScale === "MAJOR"}
 <article>
     <header><h3>Diatonic Chords</h3></header>
     <ul class="chords">
-        {#each generateDiatonicChords(selectedKey) as diatonicChords, index}
+        {#each generateDiatonicChords(selectedKey, selectedScale) as diatonicChords, index}
             <li><span class="numeral">{idxToRomanNumeral(index)}</span>
                 <span class="chord">{diatonicChords.chord}</span> {diatonicChords.quality}</li>
         {/each}
     </ul>
 </article>
-{/if}
 
 <!-- Chord Progressions -->
 
