@@ -1,4 +1,4 @@
-import { generateScaleNotes, generateFretboard, generateDiatonicChords, GUITAR_TUNINGS, type SCALE, type KEY } from './music-utils';
+import { generateScaleNotes, generateFretboard, generateCommonChordProgressions, generateDiatonicChords, GUITAR_TUNINGS, type SCALE, type KEY } from './music-utils';
 
 const STANDARD_TUNING = GUITAR_TUNINGS.get("Standard Tuning")!;
 
@@ -219,5 +219,67 @@ describe('generateDiatonicChords', () => {
       { chord: 'D#', quality: 'diminished' },
     ];
     expect(generateDiatonicChords('E')).toEqual(expectedChords);
+  });
+
+  describe('generateCommonChordProgressions', () => {
+    it('should generate correct chord progressions for C major', () => {
+      const expectedProgressions = [
+        {
+          progression: ['I', 'IV', 'V'],
+          chords: ['C', 'F', 'G'],
+        },
+        {
+          progression: ['ii', 'V', 'I'],
+          chords: ['D', 'G', 'C'],
+        },
+        {
+          progression: ['I', 'IV', 'vi', 'V'],
+          chords: ['C', 'F', 'A', 'G'],
+        },
+        {
+          progression: ['I', 'vi', 'IV', 'V'],
+          chords: ['C', 'A', 'F', 'G'],
+        },
+         {
+          progression: ['I', 'iii', 'IV', 'V'],
+          chords: ['C', 'E', 'F', 'G'],
+        },
+         {
+          progression: ['I', 'iii', 'vi', 'V'],
+          chords: ['C', 'E', 'A', 'G'],
+        },
+      ];
+      expect(generateCommonChordProgressions('C', 'MAJOR')).toEqual(expectedProgressions);
+    });
+
+    it('should generate correct chord progressions for A minor', () => {
+      const expectedProgressions = [
+        {
+          progression: ['i', 'iv', 'v'],
+          chords: ['A', 'D', 'E'],
+        },
+        {
+          progression: ['ii°', 'v', 'i'],
+          chords: ['B', 'E', 'A'],
+        },
+        {
+          progression: ['i', 'iv', 'VI', 'v'],
+          chords: ['A', 'D', 'F', 'E'],
+        },
+        {
+          progression: ['i', 'VI', 'iv', 'v'],
+          chords: ['A', 'F', 'D', 'E'],
+        },
+         {
+          progression: ['i', 'III', 'iv', 'v'],
+          chords: ['A', 'C', 'D', 'E'],
+        },
+         {
+          progression: ['i', 'III', 'VI', 'v'],
+          chords: ['A', 'C', 'F', 'E'],
+        },
+      ];
+      expect(generateCommonChordProgressions('A', 'NATURAL MINOR')).toEqual(expectedProgressions);
+    });
   });
 });
