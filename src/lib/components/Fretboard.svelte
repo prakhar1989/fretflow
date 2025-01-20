@@ -6,6 +6,7 @@
         generateFretboard,
         generateDiatonicChords,
         generateScaleNotes,
+        generateCommonChordProgressions,
     } from "$lib/music-utils";
     import { fade } from "svelte/transition";
 
@@ -21,6 +22,10 @@
     );
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
+    $: progressions = generateCommonChordProgressions(
+        key,
+        selectedScale as SCALE,
+    );
     $: showAllNotes = false;
     $: idxToRomanNumeral = (idx: number) =>
         ["I", "II", "III", "IV", "V", "VI", "VII"][idx];
@@ -126,7 +131,7 @@
     </div>
 </article>
 
-<div class="grid">
+<div class="grid scale-section">
     <!-- SCALE -->
     <article>
         <header><h3>Diatonic Chords</h3></header>
@@ -144,12 +149,15 @@
     <!-- Chord Progressions -->
     <article>
         <header><h3>Common Chord Progressions</h3></header>
-        <ul class="chords">
-            {#each generateDiatonicChords(selectedKey, selectedScale as SCALE) as diatonicChords, index}
+        <ul class="progressions">
+            {#each progressions as progression}
                 <li>
-                    <span class="numeral">{idxToRomanNumeral(index)}</span>
-                    <span class="chord">{diatonicChords.chord}</span>
-                    {diatonicChords.quality}
+                    {#each progression.progression as p, indx}
+                        <div class="progress">
+                            <span class="chord">{progression.chords[indx]}</span>
+                            <span><strong>{p}</strong></span>
+                        </div>
+                    {/each}
                 </li>
             {/each}
         </ul>
@@ -157,6 +165,10 @@
 </div>
 
 <style>
+    .scale-section {
+        grid-template-columns: 3fr 2fr;
+    }
+
     .controls .grid {
         align-items: center;
     }
@@ -171,6 +183,25 @@
         display: flex;
         align-items: center;
         gap: 0.2em;
+    }
+
+    .progressions {
+        margin: 0;
+        padding: 0;
+    }
+
+    .progressions li {
+        display: flex;
+        gap: 20px;
+    }
+
+    .progressions .progress {
+        display: flex;
+        border-radius: 8px;
+        padding: 8px 24px;
+        flex-direction: column;
+        background-color: var(--pico-blockquote-border-color);
+        align-items: center;
     }
 
     .chords li .numeral {

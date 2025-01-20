@@ -80,7 +80,6 @@ export function generateCommonChordProgressions(key: KEY, scale: SCALE) {
         [1, 4, 5],        // I-IV-V
         [2, 5, 1],        // ii-V-I
         [1, 4, 6, 5],     // I-IV-vi-V
-        [1, 6, 4, 5],     // I-vi-IV-V
         [1, 3, 4, 5],     // I-iii-IV-V
         [1, 3, 6, 5],     // I-iii-vi-V
     ];
