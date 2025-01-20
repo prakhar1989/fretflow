@@ -75,6 +75,40 @@ export const generateScaleNotes = (key: KEY, scale: SCALE): Set<KEY> => {
     return notes;
 }
 
+export function generateCommonChordProgressions(key: KEY, scale: SCALE) {
+    const commonProgressions = [
+        [1, 4, 5],        // I-IV-V
+        [2, 5, 1],        // ii-V-I
+        [1, 4, 6, 5],     // I-IV-vi-V
+        [1, 6, 4, 5],     // I-vi-IV-V
+        [1, 3, 4, 5],     // I-iii-IV-V
+        [1, 3, 6, 5],     // I-iii-vi-V
+    ];
+
+    // assume scale is one of MAJOR or NATURAL MINOR for now
+    // generate scale notes return an array of notes in that scale
+    const scaleNotes = generateScaleNotes(key, scale);
+
+    // Convert scale degree to chord symbols
+    const degreeToRoman = (degree: number, scaleType: SCALE) => {
+        const romanNumerals = ["I", "ii", "iii", "IV", "V", "vi", "vii°"];
+        const romanMinorNumerals = ["i", "ii°", "III", "iv", "v", "VI", "VII"];
+        return scaleType === "MAJOR" ? romanNumerals[degree - 1] : romanMinorNumerals[degree - 1];
+    };
+
+    // Build the result array
+    const progressions = commonProgressions.map(progression => {
+        const romanNumerals = progression.map(degree => degreeToRoman(degree, scale));
+        const chords = progression.map(degree => Array.from(scaleNotes)[degree - 1]);
+        return {
+            progression: romanNumerals,
+            chords: chords
+        };
+    });
+
+    return progressions;
+}
+
 export function generateDiatonicChords(key: KEY, scale: SCALE = "MAJOR"): { chord: string; quality: ChordQuality }[] {
     let effectiveScale = scale;
 

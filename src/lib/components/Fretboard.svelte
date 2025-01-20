@@ -22,7 +22,8 @@
     $: selectedKey = key;
     $: scaleNotes = generateScaleNotes(key, selectedScale as SCALE);
     $: showAllNotes = false;
-    $: idxToRomanNumeral = (idx: number) => ["I", "II", "III", "IV", "V", "VI", "VII"][idx];
+    $: idxToRomanNumeral = (idx: number) =>
+        ["I", "II", "III", "IV", "V", "VI", "VII"][idx];
 </script>
 
 <article class="controls">
@@ -85,7 +86,7 @@
         <nav>
             <ul>
                 {#each scaleNotes as note}
-                <li class="fret">{note}</li>
+                    <li class="fret">{note}</li>
                 {/each}
             </ul>
         </nav>
@@ -125,25 +126,42 @@
     </div>
 </article>
 
-<!-- SCALE -->
-<article>
-    <header><h3>Diatonic Chords</h3></header>
-    <ul class="chords">
-        {#each generateDiatonicChords(selectedKey, selectedScale) as diatonicChords, index}
-            <li><span class="numeral">{idxToRomanNumeral(index)}</span>
-                <span class="chord">{diatonicChords.chord}</span> {diatonicChords.quality}</li>
-        {/each}
-    </ul>
-</article>
+<div class="grid">
+    <!-- SCALE -->
+    <article>
+        <header><h3>Diatonic Chords</h3></header>
+        <ul class="chords">
+            {#each generateDiatonicChords(selectedKey, selectedScale as SCALE) as diatonicChords, index}
+                <li>
+                    <span class="numeral">{idxToRomanNumeral(index)}</span>
+                    <span class="chord">{diatonicChords.chord}</span>
+                    {diatonicChords.quality}
+                </li>
+            {/each}
+        </ul>
+    </article>
 
-<!-- Chord Progressions -->
+    <!-- Chord Progressions -->
+    <article>
+        <header><h3>Common Chord Progressions</h3></header>
+        <ul class="chords">
+            {#each generateDiatonicChords(selectedKey, selectedScale as SCALE) as diatonicChords, index}
+                <li>
+                    <span class="numeral">{idxToRomanNumeral(index)}</span>
+                    <span class="chord">{diatonicChords.chord}</span>
+                    {diatonicChords.quality}
+                </li>
+            {/each}
+        </ul>
+    </article>
+</div>
 
 <style>
     .controls .grid {
         align-items: center;
     }
 
-    .chords{
+    .chords {
         margin: 0;
         padding: 0;
     }
