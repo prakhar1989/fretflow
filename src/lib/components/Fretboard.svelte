@@ -165,10 +165,6 @@
 </div>
 
 <style>
-    .scale-section {
-        grid-template-columns: 3fr 2fr;
-    }
-
     .controls .grid {
         align-items: center;
     }
