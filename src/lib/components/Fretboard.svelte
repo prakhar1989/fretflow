@@ -28,7 +28,7 @@
     );
     $: showAllNotes = false;
     $: idxToRomanNumeral = (idx: number) =>
-        ["I", "II", "III", "IV", "V", "VI", "VII"][idx];
+        ["I", "ii", "iii", "IV", "V", "vi", "vii°"][idx];
 </script>
 
 <article class="controls">
