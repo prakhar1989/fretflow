@@ -179,6 +179,7 @@
         display: flex;
         align-items: center;
         gap: 0.2em;
+        margin: 24px 0;
     }
 
     .progressions {
@@ -189,6 +190,7 @@
     .progressions li {
         display: flex;
         gap: 20px;
+        margin-bottom: 16px;
     }
 
     .progressions .progress {
